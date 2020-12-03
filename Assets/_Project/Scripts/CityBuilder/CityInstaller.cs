@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 
 using _Project.Scripts.Json;
 using _Project.Scripts.Json.Converters;
+using _Project.Scripts.CityBuilder.Data;
+using _Project.Scripts.PrefabDictionary;
 
 namespace _Project.Scripts.CityBuilder
 {
@@ -11,6 +13,9 @@ namespace _Project.Scripts.CityBuilder
     {
         [SerializeField]
         private TextAsset _gameConfig;
+
+        [SerializeField]
+        private PrefabDictionaryScriptableObject _prefabDictionarySO;
 
         [SerializeField]
         private CityBuilder _cityBuilder;
@@ -28,13 +33,17 @@ namespace _Project.Scripts.CityBuilder
                 .AsSingle();
 
             Container
-                .BindInterfacesAndSelfTo<JsonConverter<Data.City>>()
+                .BindInterfacesAndSelfTo<JsonConverter<City>>()
                 .FromInstance(new CityJsonConverter())
                 .AsSingle();
 
             Container
-                .Bind<Data.City>()
-                .FromIFactory(x => x.To<JsonWrapperFactory<Data.City>>().AsSingle())
+                .Bind<City>()
+                .FromIFactory(x => x.To<JsonWrapperFactory<City>>().AsSingle())
+                .AsSingle();
+
+            Container
+                .BindInstance(_prefabDictionarySO.PrefabSerializableDictionary)
                 .AsSingle();
 
             Container

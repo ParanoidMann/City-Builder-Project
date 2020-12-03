@@ -4,19 +4,19 @@
     "height": 150,
     "buildings": [
       {
-        "prefabId": 1,
+        "prefabId": 0,
         "baseSize": 1,
         "height": 1,
         "might": 1
       },
       {
-        "prefabId": 2,
+        "prefabId": 1,
         "baseSize": 2,
         "height": 2,
         "might": 4
       },
       {
-        "prefabId": 3,
+        "prefabId": 2,
         "baseSize": 3,
         "height": 4,
         "might": 9
