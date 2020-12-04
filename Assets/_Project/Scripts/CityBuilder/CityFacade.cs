@@ -6,34 +6,29 @@ namespace _Project.Scripts.CityBuilder
     public class CityFacade : MonoBehaviour
     {
         [SerializeField]
-        private Transform _contentRoot;
-
-        [Header("Grid")]
-        [SerializeField]
-        private float _xCellOffsetMultiplier = 1.0f;
-
-        [SerializeField]
-        private float _yCellOffsetMultiplier = 1.0f;
+        private Transform _terrain; // TODO : mb to installer
 
         private CityGridBuilder _gridBuilder;
+        private TerrainManager _terrainManager;
 
         [Inject]
-        private void Construct(CityGridBuilder gridBuilder)
+        private void Construct(
+            CityGridBuilder gridBuilder,
+            TerrainManager terrainManager)
         {
             _gridBuilder = gridBuilder;
-        }
-
-        private void OnValidate()
-        {
-            if (_contentRoot == null)
-            {
-                _contentRoot = GetComponent<Transform>();
-            }
+            _terrainManager = terrainManager;
         }
 
         private void Awake()
         {
-            _gridBuilder.BuildGrid(_contentRoot, _xCellOffsetMultiplier, _yCellOffsetMultiplier);
+            _gridBuilder.BuildGrid();
+            _terrainManager.InitTerrain(_terrain);
+        }
+
+        public void OnBuildHouse(Vector3Int position)
+        {
+            Debug.Log($"position = {position}");
         }
     }
 }

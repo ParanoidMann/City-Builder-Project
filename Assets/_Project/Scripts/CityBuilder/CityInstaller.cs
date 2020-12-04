@@ -19,7 +19,7 @@ namespace _Project.Scripts.CityBuilder
 
         [SerializeField]
         private CityFacade _cityFacade;
-        
+
         private void AssertSerialized()
         {
             Debug.Assert(_gameConfig != null, "Game Config == null", this);
@@ -50,7 +50,11 @@ namespace _Project.Scripts.CityBuilder
             Container
                 .BindInterfacesAndSelfTo<CityGridBuilder>()
                 .AsSingle();
-            
+
+            Container
+                .BindInterfacesAndSelfTo<TerrainManager>()
+                .AsSingle();
+
             Container
                 .BindInterfacesAndSelfTo<CityFacade>()
                 .FromInstance(_cityFacade);
