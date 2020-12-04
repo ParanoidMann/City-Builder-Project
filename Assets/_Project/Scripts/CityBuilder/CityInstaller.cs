@@ -18,12 +18,13 @@ namespace _Project.Scripts.CityBuilder
         private PrefabDictionaryScriptableObject _prefabDictionarySO;
 
         [SerializeField]
-        private CityBuilder _cityBuilder;
-
+        private CityFacade _cityFacade;
+        
         private void AssertSerialized()
         {
             Debug.Assert(_gameConfig != null, "Game Config == null", this);
-            Debug.Assert(_cityBuilder != null, "City Builder == null", this);
+            Debug.Assert(_prefabDictionarySO != null, "Prefab Dictionary == null", this);
+            Debug.Assert(_cityFacade != null, "City Facade == null", this);
         }
 
         private void SetupBindings()
@@ -47,8 +48,12 @@ namespace _Project.Scripts.CityBuilder
                 .AsSingle();
 
             Container
-                .BindInterfacesAndSelfTo<CityBuilder>()
-                .FromInstance(_cityBuilder);
+                .BindInterfacesAndSelfTo<CityGridBuilder>()
+                .AsSingle();
+            
+            Container
+                .BindInterfacesAndSelfTo<CityFacade>()
+                .FromInstance(_cityFacade);
         }
 
         public override void InstallBindings()

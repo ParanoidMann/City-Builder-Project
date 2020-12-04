@@ -35,6 +35,7 @@ namespace _Project.Scripts.Json.Converters
                 var jsonObject = JObject.Load(reader)["city"];
 
                 return new City(
+                    (int) jsonObject["prefabId"],
                     (int) jsonObject["width"],
                     (int) jsonObject["height"],
                     ReadBuildings(jsonObject["buildings"]));

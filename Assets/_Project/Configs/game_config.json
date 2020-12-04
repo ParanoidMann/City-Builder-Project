@@ -1,22 +1,23 @@
 ﻿{
   "city": {
+    "prefabId": 0,
     "width": 100,
     "height": 150,
     "buildings": [
       {
-        "prefabId": 0,
+        "prefabId": 1,
         "baseSize": 1,
         "height": 1,
         "might": 1
       },
       {
-        "prefabId": 1,
+        "prefabId": 2,
         "baseSize": 2,
         "height": 2,
         "might": 4
       },
       {
-        "prefabId": 2,
+        "prefabId": 3,
         "baseSize": 3,
         "height": 4,
         "might": 9
