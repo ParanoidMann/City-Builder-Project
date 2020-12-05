@@ -13,21 +13,55 @@ namespace _Project.Scripts.Interaction.Input
 
         private void Update()
         {
-            CheckClickDownEvent();
-            CheckCancelClickEvent();
+            CheckMovementEvents();
+            CheckZoomEvents();
+            CheckClickEvents();
         }
 
-        private void CheckClickDownEvent()
+        private void CheckMovementEvents()
+        {
+            if (UnityEngine.Input.mousePosition.y >= Screen.height - 1)
+            {
+                InvokeMoveUp();
+            }
+
+            if (UnityEngine.Input.mousePosition.y <= 0)
+            {
+                InvokeMoveDown();
+            }
+
+            if (UnityEngine.Input.mousePosition.x >= Screen.width - 1)
+            {
+                InvokeMoveRight();
+            }
+
+            if (UnityEngine.Input.mousePosition.x <= 0)
+            {
+                InvokeMoveLeft();
+            }
+        }
+
+        private void CheckZoomEvents()
+        {
+            if (UnityEngine.Input.GetAxis("Mouse ScrollWheel") > 0.0f)
+            {
+                InvokeZoomIn();
+            }
+
+            if (UnityEngine.Input.GetAxis("Mouse ScrollWheel") < 0.0f)
+            {
+                InvokeZoomOut();
+            }
+        }
+
+        private void CheckClickEvents()
         {
             if (UnityEngine.Input.GetMouseButtonDown(0)
                 && EventSystem.current.IsPointerOverGameObject() == false)
             {
                 InvokeClickDownAfterRaycast();
             }
-        }
 
-        private void CheckCancelClickEvent()
-        {
             if (UnityEngine.Input.GetKey(KeyCode.Escape))
             {
                 InvokeCancelClick();

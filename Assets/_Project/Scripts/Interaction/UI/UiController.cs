@@ -8,7 +8,7 @@ namespace _Project.Scripts.Interaction.UI
 {
     public class UiController : MonoBehaviour
     {
-        private event Action _callBuildEvent;
+        private event Action CallBuildEvent;
 
         [SerializeField]
         private Button _buildButton;
@@ -17,20 +17,20 @@ namespace _Project.Scripts.Interaction.UI
         {
             _buildButton.onClick.AddListener(() =>
             {
-                _callBuildEvent?.Invoke();
+                CallBuildEvent?.Invoke();
             });
         }
 
         public void SubscribeBuildCalling(Action action)
         {
             Assert.IsNotNull(action, "Action is null");
-            _callBuildEvent += action;
+            CallBuildEvent += action;
         }
 
         public void UnsubscribeBuildCalling(Action action)
         {
             Assert.IsNotNull(action, "Action is null");
-            _callBuildEvent -= action;
+            CallBuildEvent -= action;
         }
     }
 }
