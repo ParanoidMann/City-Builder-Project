@@ -33,7 +33,7 @@ namespace _Project.Scripts.City.Builders.Terrain
             _terrain = MonoBehaviour.Instantiate(_terrainPrefab);
 
             _terrain.transform.localScale = new Vector3(
-                _cityConfig.Width, DefaultTerrainHeight, _cityConfig.Height);
+                _cityConfig.Width, DefaultTerrainHeight, _cityConfig.Length);
         }
 
         public void PlaceBuilding(Vector3Int position, int buildingIndex)
@@ -42,8 +42,8 @@ namespace _Project.Scripts.City.Builders.Terrain
 
             if (_prefabDictionary.TryGetValue(buildingConfig.PrefabId, out var buildingPrefab))
             {
-                var a = MonoBehaviour.Instantiate(buildingPrefab);
-                a.transform.position = position;
+                var building = MonoBehaviour.Instantiate(buildingPrefab);
+                building.transform.position = position;
             }
             else
             {

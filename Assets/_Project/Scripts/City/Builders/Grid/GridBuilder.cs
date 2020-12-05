@@ -18,7 +18,7 @@ namespace _Project.Scripts.City.Builders.Grid
 
         public void BuildCity()
         {
-            _cityGrid = new CityGrid(_cityConfig.Width, _cityConfig.Height);
+            _cityGrid = new CityGrid(_cityConfig.Width, _cityConfig.Length);
         }
 
         public void PlaceBuilding(Vector3Int position, int buildingIndex)

@@ -37,7 +37,7 @@ namespace _Project.Scripts.Json.Converters
                 return new CityConfig(
                     (int) jsonObject["prefabId"],
                     (int) jsonObject["width"],
-                    (int) jsonObject["height"],
+                    (int) jsonObject["length"],
                     ReadBuildings(jsonObject["buildings"]));
             }
 

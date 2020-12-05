@@ -7,23 +7,23 @@ namespace _Project.Scripts.City.Data
     {
         private int _prefabId;
         private int _width;
-        private int _height;
+        private int _length;
         private BuildingConfig[] _buildings;
 
         public int PrefabId => _prefabId;
         public int Width => _width;
-        public int Height => _height;
+        public int Length => _length;
         public BuildingConfig[] Buildings => _buildings;
 
         public CityConfig(
             int prefabId,
             int width,
-            int height,
+            int length,
             BuildingConfig[] buildings)
         {
             _prefabId = prefabId;
             _width = width;
-            _height = height;
+            _length = length;
             _buildings = buildings;
         }
     }
