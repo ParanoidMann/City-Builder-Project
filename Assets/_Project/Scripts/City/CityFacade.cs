@@ -1,5 +1,9 @@
-﻿using Zenject;
+﻿using System;
+using Zenject;
+using ModestTree;
+
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 using _Project.Scripts.City.Builders.Grid;
 using _Project.Scripts.City.ConfigWrappers;
@@ -9,8 +13,9 @@ namespace _Project.Scripts.City
 {
     public class CityFacade : MonoBehaviour
     {
-        private CityConfig _cityConfig;
+        private event Action<int> BuildCompletedEvent;
 
+        private CityConfig _cityConfig;
         private GridBuilder _gridBuilder;
         private TerrainBuilder _terrainBuilder;
 
@@ -47,12 +52,34 @@ namespace _Project.Scripts.City
             _terrainBuilder.PlaceBuilding(position, buildingIndex);
         }
 
+        private void InvokeBuildingCompleted(int buildingIndex)
+        {
+            var might = _cityConfig.Buildings[buildingIndex].Might;
+
+            BuildCompletedEvent?.Invoke(might);
+        }
+
         public void OnPlaceBuilding(Vector3Int position)
         {
             if (_gridBuilder.IsPositionFree(position))
             {
-                PlaceBuilding(position, GetRandomBuildingIndex());
+                var buildingIndex = GetRandomBuildingIndex();
+
+                PlaceBuilding(position, buildingIndex);
+                InvokeBuildingCompleted(buildingIndex);
             }
+        }
+
+        public void SubscribeBuildingCompleted(Action<int> action)
+        {
+            Assert.IsNotNull(action, "Action is null");
+            BuildCompletedEvent += action;
+        }
+
+        public void UnsubscribeBuildingCompleted(Action<int> action)
+        {
+            Assert.IsNotNull(action, "Action is null");
+            BuildCompletedEvent -= action;
         }
     }
 }

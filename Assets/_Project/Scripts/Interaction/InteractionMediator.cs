@@ -44,20 +44,24 @@ namespace _Project.Scripts.Interaction
             _inputController.UnsubscribeMoveRight(_cameraMover.OnMoveRight);
             _inputController.UnsubscribeMoveLeft(_cameraMover.OnMoveLeft);
 
-            _inputController.SubscribeZoomIn(_cameraMover.OnZoomIn);
-            _inputController.SubscribeZoomOut(_cameraMover.OnZoomOut);
+            _inputController.UnsubscribeZoomIn(_cameraMover.OnZoomIn);
+            _inputController.UnsubscribeZoomOut(_cameraMover.OnZoomOut);
         }
 
         private void OnBuildingStarted()
         {
             _inputController.SubscribeClickDown(_cityFacade.OnPlaceBuilding);
             _inputController.SubscribeCancelClick(OnBuildingStopped);
+
+            _cityFacade.SubscribeBuildingCompleted(_uiController.OnIncreaseMight);
         }
 
-        private void OnBuildingStopped() // TODO : Complete
+        private void OnBuildingStopped()
         {
             _inputController.UnsubscribeClickDown(_cityFacade.OnPlaceBuilding);
             _inputController.UnsubscribeCancelClick(OnBuildingStopped);
+
+            _cityFacade.UnsubscribeBuildingCompleted(_uiController.OnIncreaseMight);
         }
     }
 }

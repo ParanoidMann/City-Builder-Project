@@ -17,7 +17,7 @@ namespace _Project.Scripts.City.Builders.Terrain
         [Inject]
         private TerrainBuilder(
             CityConfig cityConfig,
-            GameObject terrainPrefab,
+            [Inject(Id = ZenjectTags.Terrain)] GameObject terrainPrefab,
             BuildingCreator buildingCreator)
         {
             _cityConfig = cityConfig;
@@ -36,8 +36,8 @@ namespace _Project.Scripts.City.Builders.Terrain
         public void PlaceBuilding(Vector3Int position, int buildingIndex)
         {
             var buildingConfig = _cityConfig.Buildings[buildingIndex];
-            
-            _buildingCreator.CreateBuilding(position, buildingConfig); // TODO : Add to Array
+
+            _buildingCreator.CreateBuilding(position, buildingConfig);
         }
     }
 }

@@ -10,15 +10,35 @@ namespace _Project.Scripts.Interaction.UI
     {
         private event Action CallBuildEvent;
 
+        private const string MightLabel = "Might: ";
+
         [SerializeField]
         private Button _buildButton;
 
+        [SerializeField]
+        private Text _mightText;
+
+        private int _might;
+
         private void Start()
         {
+            SetMight(0);
+
             _buildButton.onClick.AddListener(() =>
             {
                 CallBuildEvent?.Invoke();
             });
+        }
+
+        private void SetMight(int might)
+        {
+            _might = might;
+            _mightText.text = MightLabel + _might;
+        }
+
+        public void OnIncreaseMight(int might)
+        {
+            SetMight(_might + might);
         }
 
         public void SubscribeBuildCalling(Action action)

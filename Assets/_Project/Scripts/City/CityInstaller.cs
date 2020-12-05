@@ -1,5 +1,4 @@
 ﻿using Zenject;
-
 using UnityEngine;
 using Newtonsoft.Json;
 
@@ -24,6 +23,9 @@ namespace _Project.Scripts.City
         private GameObject _terrainPrefab;
 
         [SerializeField]
+        private GameObject _mightCanvasPrefab;
+
+        [SerializeField]
         private CityFacade _cityFacade;
 
         private void AssertSerialized()
@@ -31,6 +33,7 @@ namespace _Project.Scripts.City
             Debug.Assert(_gameConfig != null, "Game Config == null", this);
             Debug.Assert(_prefabDictionarySO != null, "Prefab Dictionary == null", this);
             Debug.Assert(_terrainPrefab != null, "Terrain Prefab == null", this);
+            Debug.Assert(_mightCanvasPrefab != null, "Might Canvas Prefab == null", this);
             Debug.Assert(_cityFacade != null, "City Facade == null", this);
         }
 
@@ -57,7 +60,11 @@ namespace _Project.Scripts.City
 
             Container
                 .BindInstance(_terrainPrefab)
-                .AsSingle();
+                .WithId(ZenjectTags.Terrain);
+
+            Container
+                .BindInstance(_mightCanvasPrefab)
+                .WithId(ZenjectTags.Might);
 
             Container
                 .BindInterfacesAndSelfTo<GridBuilder>()
@@ -66,7 +73,7 @@ namespace _Project.Scripts.City
             Container
                 .BindInterfacesAndSelfTo<TerrainBuilder>()
                 .AsSingle();
-            
+
             Container
                 .BindInterfacesAndSelfTo<BuildingCreator>()
                 .AsSingle();
