@@ -1,6 +1,6 @@
 ﻿using Zenject;
 using UnityEngine;
-using _Project.Scripts.City.Data;
+using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Builders.Grid
 {
@@ -25,7 +25,7 @@ namespace _Project.Scripts.City.Builders.Grid
         {
             _cityGrid[position.x, position.z] = CellType.Building;
         }
-        
+
         public bool IsPositionFree(Vector3Int position)
         {
             return _cityGrid[position.x, position.z] == CellType.Empty;

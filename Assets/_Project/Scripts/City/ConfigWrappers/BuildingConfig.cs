@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _Project.Scripts.City.Data
+namespace _Project.Scripts.City.ConfigWrappers
 {
     [Serializable]
     public class BuildingConfig

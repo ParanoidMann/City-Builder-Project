@@ -2,8 +2,8 @@
 using Zenject;
 using UnityEngine;
 
-using _Project.Scripts.City.Data;
 using _Project.Scripts.PrefabDictionary;
+using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Builders.Terrain
 {
@@ -31,7 +31,7 @@ namespace _Project.Scripts.City.Builders.Terrain
         public void BuildCity()
         {
             _terrain = MonoBehaviour.Instantiate(_terrainPrefab);
-            
+
             _terrain.transform.localScale = new Vector3(
                 _cityConfig.Width, DefaultTerrainHeight, _cityConfig.Length);
         }

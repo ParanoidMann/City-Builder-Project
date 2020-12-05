@@ -1,5 +1,5 @@
 ﻿using System;
-using _Project.Scripts.City.Data;
+using _Project.Scripts.City.ConfigWrappers;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

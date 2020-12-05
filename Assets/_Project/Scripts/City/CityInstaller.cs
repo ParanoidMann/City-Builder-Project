@@ -1,12 +1,13 @@
 ﻿using Zenject;
+
 using UnityEngine;
 using Newtonsoft.Json;
 
 using _Project.Scripts.Json;
-using _Project.Scripts.City.Data;
 using _Project.Scripts.Json.Converters;
 using _Project.Scripts.PrefabDictionary;
 using _Project.Scripts.City.Builders.Grid;
+using _Project.Scripts.City.ConfigWrappers;
 using _Project.Scripts.City.Builders.Terrain;
 
 namespace _Project.Scripts.City
