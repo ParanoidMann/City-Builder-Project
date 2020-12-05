@@ -66,6 +66,10 @@ namespace _Project.Scripts.City
             Container
                 .BindInterfacesAndSelfTo<TerrainBuilder>()
                 .AsSingle();
+            
+            Container
+                .BindInterfacesAndSelfTo<BuildingCreator>()
+                .AsSingle();
 
             Container
                 .BindInterfacesAndSelfTo<CityFacade>()

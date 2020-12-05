@@ -1,8 +1,5 @@
-﻿using System;
-using Zenject;
+﻿using Zenject;
 using UnityEngine;
-
-using _Project.Scripts.PrefabDictionary;
 using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Builders.Terrain
@@ -13,7 +10,7 @@ namespace _Project.Scripts.City.Builders.Terrain
 
         private CityConfig _cityConfig;
         private GameObject _terrainPrefab;
-        private PrefabSerializableDictionary _prefabDictionary;
+        private BuildingCreator _buildingCreator;
 
         private GameObject _terrain;
 
@@ -21,11 +18,11 @@ namespace _Project.Scripts.City.Builders.Terrain
         private TerrainBuilder(
             CityConfig cityConfig,
             GameObject terrainPrefab,
-            PrefabSerializableDictionary prefabDictionary)
+            BuildingCreator buildingCreator)
         {
             _cityConfig = cityConfig;
             _terrainPrefab = terrainPrefab;
-            _prefabDictionary = prefabDictionary;
+            _buildingCreator = buildingCreator;
         }
 
         public void BuildCity()
@@ -39,16 +36,8 @@ namespace _Project.Scripts.City.Builders.Terrain
         public void PlaceBuilding(Vector3Int position, int buildingIndex)
         {
             var buildingConfig = _cityConfig.Buildings[buildingIndex];
-
-            if (_prefabDictionary.TryGetValue(buildingConfig.PrefabId, out var buildingPrefab))
-            {
-                var building = MonoBehaviour.Instantiate(buildingPrefab);
-                building.transform.position = position;
-            }
-            else
-            {
-                throw new InvalidOperationException("No such element");
-            }
+            
+            _buildingCreator.CreateBuilding(position, buildingConfig); // TODO : Add to Array
         }
     }
 }

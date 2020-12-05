@@ -31,13 +31,13 @@ namespace _Project.Scripts.Interaction
 
         private void OnBuildingStarted()
         {
-            _inputController.SubscribeClickDown(_cityFacade.OnBuildHouse);
+            _inputController.SubscribeClickDown(_cityFacade.OnPlaceBuilding);
             _inputController.SubscribeCancelClick(OnBuildingStopped);
         }
 
         private void OnBuildingStopped() // TODO : Complete
         {
-            _inputController.UnsubscribeClickDown(_cityFacade.OnBuildHouse);
+            _inputController.UnsubscribeClickDown(_cityFacade.OnPlaceBuilding);
             _inputController.UnsubscribeCancelClick(OnBuildingStopped);
         }
     }

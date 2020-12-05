@@ -47,7 +47,7 @@ namespace _Project.Scripts.City
             _terrainBuilder.PlaceBuilding(position, buildingIndex);
         }
 
-        public void OnBuildHouse(Vector3Int position)
+        public void OnPlaceBuilding(Vector3Int position)
         {
             if (_gridBuilder.IsPositionFree(position))
             {
