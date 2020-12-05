@@ -2,8 +2,8 @@
 {
     public enum CellType
     {
-        None,
         Empty,
-        Building
+        Building,
+        Closed
     }
 }

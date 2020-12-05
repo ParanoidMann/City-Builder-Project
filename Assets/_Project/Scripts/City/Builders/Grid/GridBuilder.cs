@@ -1,23 +1,34 @@
 ﻿using Zenject;
+using UnityEngine;
 using _Project.Scripts.City.Data;
 
 namespace _Project.Scripts.City.Builders.Grid
 {
     public class GridBuilder : ICityBuilder
     {
-        private CityConfig _cityConfigConfig;
+        private CityConfig _cityConfig;
 
-        private CityGrid _grid;
+        private CityGrid _cityGrid;
 
         [Inject]
-        private GridBuilder(CityConfig cityConfigConfig)
+        private GridBuilder(CityConfig cityConfig)
         {
-            _cityConfigConfig = cityConfigConfig;
+            _cityConfig = cityConfig;
         }
 
-        public void Build()
+        public void BuildCity()
         {
-            _grid = new CityGrid(_cityConfigConfig.Width, _cityConfigConfig.Height);
+            _cityGrid = new CityGrid(_cityConfig.Width, _cityConfig.Height);
+        }
+
+        public void PlaceBuilding(Vector3Int position, int buildingIndex)
+        {
+            _cityGrid[position.x, position.z] = CellType.Building;
+        }
+        
+        public bool IsPositionFree(Vector3Int position)
+        {
+            return _cityGrid[position.x, position.z] == CellType.Empty;
         }
     }
 }

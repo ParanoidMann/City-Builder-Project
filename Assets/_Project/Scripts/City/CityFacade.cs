@@ -1,6 +1,7 @@
 ﻿using Zenject;
 using UnityEngine;
 
+using _Project.Scripts.City.Data;
 using _Project.Scripts.City.Builders.Grid;
 using _Project.Scripts.City.Builders.Terrain;
 
@@ -8,14 +9,18 @@ namespace _Project.Scripts.City
 {
     public class CityFacade : MonoBehaviour
     {
+        private CityConfig _cityConfig;
+        
         private GridBuilder _gridBuilder;
         private TerrainBuilder _terrainBuilder;
 
         [Inject]
         private void Construct(
+            CityConfig cityConfig,
             GridBuilder gridBuilder,
             TerrainBuilder terrainBuilder)
         {
+            _cityConfig = cityConfig;
             _gridBuilder = gridBuilder;
             _terrainBuilder = terrainBuilder;
         }
@@ -25,15 +30,29 @@ namespace _Project.Scripts.City
             BuildCity();
         }
 
+        private int GetRandomBuildingIndex()
+        {
+            return Random.Range(0, _cityConfig.Buildings.Length - 1);
+        }
+        
         private void BuildCity()
         {
-            _gridBuilder.Build();
-            _terrainBuilder.Build();
+            _gridBuilder.BuildCity();
+            _terrainBuilder.BuildCity();
         }
 
+        private void PlaceBuilding(Vector3Int position, int buildingIndex)
+        {
+            _gridBuilder.PlaceBuilding(position, buildingIndex);
+            _terrainBuilder.PlaceBuilding(position, buildingIndex);
+        }
+        
         public void OnBuildHouse(Vector3Int position)
         {
-            Debug.Log($"position = {position}");
+            if (_gridBuilder.IsPositionFree(position))
+            {
+                PlaceBuilding(position, GetRandomBuildingIndex());
+            }
         }
     }
 }
