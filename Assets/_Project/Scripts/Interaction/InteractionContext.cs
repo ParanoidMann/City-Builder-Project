@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-using _Project.Scripts.CityBuilder;
+using _Project.Scripts.City;
+using _Project.Scripts.Interaction.UI;
 using _Project.Scripts.Interaction.Input;
 
 namespace _Project.Scripts.Interaction

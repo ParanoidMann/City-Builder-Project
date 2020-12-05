@@ -1,4 +1,4 @@
-﻿namespace _Project.Scripts.CityBuilder.Grid
+﻿namespace _Project.Scripts.City.Builders.Grid
 {
     public enum CellType
     {

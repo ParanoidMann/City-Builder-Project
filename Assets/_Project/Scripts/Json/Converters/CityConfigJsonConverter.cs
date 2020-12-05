@@ -1,37 +1,44 @@
 ﻿using System;
-using _Project.Scripts.CityBuilder.Data;
+using _Project.Scripts.City.Data;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace _Project.Scripts.Json.Converters
 {
-    public class BuildingJsonConverter : JsonConverter<Building>
+    public class CityConfigJsonConverter : JsonConverter<CityConfig>
     {
+        private BuildingConfig[] ReadBuildings(JToken buildingsToken)
+        {
+            return JsonConvert.DeserializeObject<BuildingConfig[]>(
+                buildingsToken.ToString(),
+                new BuildingConfigJsonConverter());
+        }
+
         public override void WriteJson(
             JsonWriter writer,
-            Building value,
+            CityConfig value,
             JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
 
-        public override Building ReadJson(
+        public override CityConfig ReadJson(
             JsonReader reader,
             Type objectType,
-            Building existingValue,
+            CityConfig existingValue,
             bool hasExistingValue,
             JsonSerializer serializer)
         {
             if (reader.TokenType != JsonToken.Null)
             {
-                var jsonObject = JObject.Load(reader);
+                var jsonObject = JObject.Load(reader)["city"];
 
-                return new Building(
+                return new CityConfig(
                     (int) jsonObject["prefabId"],
-                    (int) jsonObject["baseSize"],
+                    (int) jsonObject["width"],
                     (int) jsonObject["height"],
-                    (int) jsonObject["might"]);
+                    ReadBuildings(jsonObject["buildings"]));
             }
 
             throw new JsonException("Reader is null");

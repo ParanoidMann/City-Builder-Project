@@ -1,25 +1,25 @@
 ﻿using System;
 
-namespace _Project.Scripts.CityBuilder.Data
+namespace _Project.Scripts.City.Data
 {
     [Serializable]
-    public class City
+    public class CityConfig
     {
         private int _prefabId;
         private int _width;
         private int _height;
-        private Building[] _buildings;
+        private BuildingConfig[] _buildings;
 
         public int PrefabId => _prefabId;
         public int Width => _width;
         public int Height => _height;
-        public Building[] Buildings => _buildings;
+        public BuildingConfig[] Buildings => _buildings;
 
-        public City(
+        public CityConfig(
             int prefabId,
             int width,
             int height,
-            Building[] buildings)
+            BuildingConfig[] buildings)
         {
             _prefabId = prefabId;
             _width = width;

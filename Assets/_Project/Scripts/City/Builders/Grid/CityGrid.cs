@@ -1,10 +1,10 @@
-﻿namespace _Project.Scripts.CityBuilder.Grid
+﻿namespace _Project.Scripts.City.Builders.Grid
 {
     public class CityGrid
     {
         private int _width;
         private int _height;
-        
+
         private CellType[,] _grid;
 
         // private List<Point> _roadList = new List<Point>();
@@ -14,7 +14,7 @@
         {
             _width = width;
             _height = height;
-            
+
             _grid = new CellType[width, height];
         }
 

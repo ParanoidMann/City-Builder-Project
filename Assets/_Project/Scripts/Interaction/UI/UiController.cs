@@ -4,7 +4,7 @@ using ModestTree;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.Interaction
+namespace _Project.Scripts.Interaction.UI
 {
     public class UiController : MonoBehaviour
     {

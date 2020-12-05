@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace _Project.Scripts.CityBuilder.Data
+namespace _Project.Scripts.City.Data
 {
     [Serializable]
-    public class Building
+    public class BuildingConfig
     {
         private int _prefabId;
         private int _baseSize;
@@ -15,7 +15,7 @@ namespace _Project.Scripts.CityBuilder.Data
         public int Height => _height;
         public int Might => _might;
 
-        public Building(
+        public BuildingConfig(
             int prefabId,
             int baseSize,
             int height,
