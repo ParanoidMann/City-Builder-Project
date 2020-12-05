@@ -14,14 +14,23 @@ namespace _Project.Scripts.Interaction.Input
         private void Update()
         {
             CheckClickDownEvent();
+            CheckCancelClickEvent();
         }
 
         private void CheckClickDownEvent()
         {
             if (UnityEngine.Input.GetMouseButtonDown(0)
-                && EventSystem.current.IsPointerOverGameObject() == false) // TODO
+                && EventSystem.current.IsPointerOverGameObject() == false)
             {
-                TryInvokeClickDown();
+                InvokeClickDownAfterRaycast();
+            }
+        }
+
+        private void CheckCancelClickEvent()
+        {
+            if (UnityEngine.Input.GetKey(KeyCode.Escape))
+            {
+                InvokeCancelClick();
             }
         }
 
