@@ -8,8 +8,8 @@ namespace _Project.Scripts.Helpers
         {
             var color = material.color;
             var newColor = new Color(color.r, color.g, color.b, alpha);
-            
-            material.SetColor("_Color", newColor);
+
+            material.SetColor("_BaseColor", newColor);
         }
     }
 }

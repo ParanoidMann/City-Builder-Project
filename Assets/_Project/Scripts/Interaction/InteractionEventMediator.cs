@@ -25,6 +25,7 @@ namespace _Project.Scripts.Interaction
         private void OnEnable()
         {
             _uiController.SubscribeBuildCalling(OnBuildingStarted);
+            _uiController.SubscribeBuildCalling(_cityFacade.OnBuildingStarted);
 
             _inputController.SubscribeMoveUp(_cameraMover.OnMoveUp);
             _inputController.SubscribeMoveDown(_cameraMover.OnMoveDown);
@@ -38,6 +39,7 @@ namespace _Project.Scripts.Interaction
         private void OnDisable()
         {
             _uiController.UnsubscribeBuildCalling(OnBuildingStarted);
+            _uiController.UnsubscribeBuildCalling(_cityFacade.OnBuildingStarted);
 
             _inputController.UnsubscribeMoveUp(_cameraMover.OnMoveUp);
             _inputController.UnsubscribeMoveDown(_cameraMover.OnMoveDown);

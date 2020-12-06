@@ -34,7 +34,7 @@ Material:
     m_Colors:
     - _BaseColour: {r: 0, g: 0, b: 0, a: 0}
     - _CellColor: {r: 0, g: 0, b: 0, a: 0}
-    - _GridColour: {r: 1, g: 1, b: 1, a: 0.39215687}
+    - _GridColour: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 0.39215687}
     - _LineColor: {r: 1, g: 0, b: 0, a: 1}
     - _SelectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &6417981116045538960
