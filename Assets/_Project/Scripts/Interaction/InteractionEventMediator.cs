@@ -6,7 +6,7 @@ using _Project.Scripts.Interaction.Input;
 
 namespace _Project.Scripts.Interaction
 {
-    public class InteractionMediator : MonoBehaviour
+    public class InteractionEventMediator : MonoBehaviour
     {
         [Header("Input")]
         [SerializeField]
@@ -54,6 +54,7 @@ namespace _Project.Scripts.Interaction
             _inputController.SubscribeCancelClick(OnBuildingStopped);
 
             _cityFacade.SubscribeBuildingCompleted(_uiController.OnIncreaseMight);
+            _cityFacade.SubscribeBuildingStopped(OnBuildingStopped);
         }
 
         private void OnBuildingStopped()
@@ -62,6 +63,7 @@ namespace _Project.Scripts.Interaction
             _inputController.UnsubscribeCancelClick(OnBuildingStopped);
 
             _cityFacade.UnsubscribeBuildingCompleted(_uiController.OnIncreaseMight);
+            _cityFacade.UnsubscribeBuildingStopped(OnBuildingStopped);
         }
     }
 }

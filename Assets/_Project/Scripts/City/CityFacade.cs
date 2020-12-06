@@ -13,6 +13,7 @@ namespace _Project.Scripts.City
 {
     public class CityFacade : MonoBehaviour
     {
+        private event Action BuildStoppedEvent;
         private event Action<int> BuildCompletedEvent;
 
         private CityConfig _cityConfig;
@@ -57,6 +58,7 @@ namespace _Project.Scripts.City
             var might = _cityConfig.Buildings[buildingIndex].Might;
 
             BuildCompletedEvent?.Invoke(might);
+            BuildStoppedEvent?.Invoke();
         }
 
         public void OnPlaceBuilding(Vector3Int position)
@@ -70,6 +72,20 @@ namespace _Project.Scripts.City
             }
         }
 
+        #region SUBSCRIBE_METHODS
+
+        public void SubscribeBuildingStopped(Action action)
+        {
+            Assert.IsNotNull(action, "Action is null");
+            BuildStoppedEvent += action;
+        }
+
+        public void UnsubscribeBuildingStopped(Action action)
+        {
+            Assert.IsNotNull(action, "Action is null");
+            BuildStoppedEvent -= action;
+        }
+        
         public void SubscribeBuildingCompleted(Action<int> action)
         {
             Assert.IsNotNull(action, "Action is null");
@@ -81,5 +97,22 @@ namespace _Project.Scripts.City
             Assert.IsNotNull(action, "Action is null");
             BuildCompletedEvent -= action;
         }
+
+        #endregion
+        
+        // [SerializeField]
+        // private Material _material;
+        //
+        // [SerializeField]
+        // private Material _material2;
+        //
+        // private void OnGUI()
+        // {
+        //     if (GUILayout.Button("Invisible"))
+        //     {
+        //         MaterialChanger.ChangeAlpha(_material, 0.1f);
+        //         MaterialChanger.ChangeAlpha(_material2, 0.1f);
+        //     }
+        // }
     }
 }

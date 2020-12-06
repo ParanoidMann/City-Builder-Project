@@ -22,11 +22,11 @@ namespace _Project.Scripts.City.Builders.Terrain
             _prefabDictionary = prefabDictionary;
         }
 
-        private GameObject InstantiateMight(Transform root, int might) // TODO : Remove getComponent
+        private GameObject InstantiateMight(Transform root, int might)
         {
             var mightCanvas = MonoBehaviour.Instantiate(_mightPrefab, root);
 
-            var mightWorldCanvas = mightCanvas.GetComponent<MightWorldCanvas>();
+            var mightWorldCanvas = mightCanvas.GetComponent<MightWorldCanvas>();  // TODO : Remove getComponent
             mightWorldCanvas.SetText(might.ToString());
 
             return mightCanvas;
