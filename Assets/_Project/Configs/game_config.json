@@ -11,13 +11,13 @@
       },
       {
         "prefabId": 1,
-        "baseSize": 4,
+        "baseSize": 2,
         "height": 3,
         "might": 4
       },
       {
         "prefabId": 2,
-        "baseSize": 9,
+        "baseSize": 3,
         "height": 4,
         "might": 9
       }
