@@ -38,7 +38,7 @@ namespace _Project.Scripts.City
 
         private int GetRandomBuildingIndex()
         {
-            return Random.Range(0, _cityConfig.Buildings.Length - 1);
+            return Random.Range(0, _cityConfig.Buildings.Length);
         }
 
         private void BuildCity()
@@ -99,20 +99,5 @@ namespace _Project.Scripts.City
         }
 
         #endregion
-        
-        // [SerializeField]
-        // private Material _material;
-        //
-        // [SerializeField]
-        // private Material _material2;
-        //
-        // private void OnGUI()
-        // {
-        //     if (GUILayout.Button("Invisible"))
-        //     {
-        //         MaterialChanger.ChangeAlpha(_material, 0.1f);
-        //         MaterialChanger.ChangeAlpha(_material2, 0.1f);
-        //     }
-        // }
     }
 }

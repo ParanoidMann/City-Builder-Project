@@ -6,24 +6,18 @@
       {
         "prefabId": 0,
         "baseSize": 1,
-        "height": 2,
+        "height": 3,
         "might": 1
       },
       {
         "prefabId": 1,
-        "baseSize": 2,
+        "baseSize": 4,
         "height": 3,
         "might": 4
       },
       {
-        "prefabId": 1,
-        "baseSize": 2,
-        "height": 4,
-        "might": 6
-      },
-      {
         "prefabId": 2,
-        "baseSize": 3,
+        "baseSize": 9,
         "height": 4,
         "might": 9
       }

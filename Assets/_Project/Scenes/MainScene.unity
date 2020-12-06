@@ -1018,6 +1018,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6984195763530726652, guid: 7f35549db51a2324dbe2cb8711bc31c3,
+        type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6984195763530726652, guid: 7f35549db51a2324dbe2cb8711bc31c3,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6984195765428259125, guid: 7f35549db51a2324dbe2cb8711bc31c3,
         type: 3}
       propertyPath: m_LocalPosition.x
