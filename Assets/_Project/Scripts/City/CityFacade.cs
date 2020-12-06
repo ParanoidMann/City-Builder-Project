@@ -5,7 +5,6 @@ using ModestTree;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-using _Project.Scripts.Helpers;
 using _Project.Scripts.City.Builders.Grid;
 using _Project.Scripts.City.ConfigWrappers;
 using _Project.Scripts.City.Builders.Terrain;
@@ -17,18 +16,14 @@ namespace _Project.Scripts.City
         private event Action BuildStoppedEvent;
         private event Action<int> BuildCompletedEvent;
 
-        private const float FullVisibilityAlpha = 1.0f;
-
-        [Header("Materials")]
         [SerializeField]
-        private float _transparentAlpha = 0.5f;
+        private CityMaterialManager _cityMaterialManager;
         
-        [SerializeField]
-        private Material[] _materials;
-
         private CityConfig _cityConfig;
         private GridBuilder _gridBuilder;
         private TerrainBuilder _terrainBuilder;
+        
+        private int _newBuildingIndex;
 
         [Inject]
         private void Construct(
@@ -63,14 +58,6 @@ namespace _Project.Scripts.City
             _terrainBuilder.PlaceBuilding(position, buildingIndex);
         }
 
-        private void ChangeMaterialsVisibility(float alpha)
-        {
-            foreach (var material in _materials)
-            {
-                MaterialChanger.ChangeAlpha(material, alpha);
-            }
-        }
-
         private void InvokeBuildingCompleted(int buildingIndex)
         {
             var might = _cityConfig.Buildings[buildingIndex].Might;
@@ -78,22 +65,21 @@ namespace _Project.Scripts.City
             BuildCompletedEvent?.Invoke(might);
             BuildStoppedEvent?.Invoke();
         }
-
+        
         public void OnBuildingStarted()
         {
-            ChangeMaterialsVisibility(_transparentAlpha);
+            _cityMaterialManager.MakeBuildingsTransparent();
+            _newBuildingIndex = GetRandomBuildingIndex();
         }
 
         public void OnPlaceBuilding(Vector3Int position)
         {
-            if (_gridBuilder.IsPositionFree(position))
+            if (_gridBuilder.IsPositionFree(position, _newBuildingIndex))
             {
-                var buildingIndex = GetRandomBuildingIndex();
+                PlaceBuilding(position, _newBuildingIndex);
 
-                PlaceBuilding(position, buildingIndex);
-                ChangeMaterialsVisibility(FullVisibilityAlpha);
-
-                InvokeBuildingCompleted(buildingIndex);
+                _cityMaterialManager.MakeBuildingsVisible();
+                InvokeBuildingCompleted(_newBuildingIndex);
             }
         }
 

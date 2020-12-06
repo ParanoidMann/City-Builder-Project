@@ -68,6 +68,8 @@ MonoBehaviour:
     type: 2}
   _terrainPrefab: {fileID: 1429748272757011452, guid: dd6bd0a7799784a45aeaae49aaa5e2ec,
     type: 3}
+  _mightCanvasPrefab: {fileID: 328592615240200937, guid: ac5337b7664e48b478e70b3079dcea9f,
+    type: 3}
   _cityFacade: {fileID: 2851012954803408695}
 --- !u!114 &2851012954803408695
 MonoBehaviour:
@@ -81,3 +83,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec062f83e5d424792f6c4928989b8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cityMaterialManager:
+    _transparentAlpha: 0.5
+    _buildingsMaterials:
+    - {fileID: 2100000, guid: b90e70180f4666e4d95e3e0f38caae18, type: 2}
+    - {fileID: 2100000, guid: 39b5905324909ae41a80bf5661aa91c3, type: 2}

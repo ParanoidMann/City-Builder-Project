@@ -28,9 +28,9 @@ namespace _Project.Scripts.City.Builders.Grid
             var building = _cityConfig.Buildings[buildingIndex];
             var baseSize = building.BaseSize;
 
-            for (var x = position.x - EmptyCellsOffset; x <= position.x + baseSize; x++)
+            for (var x = position.x - EmptyCellsOffset; x < position.x + baseSize + EmptyCellsOffset; x++)
             {
-                for (var z = position.z - EmptyCellsOffset; z <= position.z + baseSize; z++)
+                for (var z = position.z - EmptyCellsOffset; z < position.z + baseSize + EmptyCellsOffset; z++)
                 {
                     if (x < position.x || x >= position.x + baseSize ||
                         z < position.z || z >= position.z + baseSize)
@@ -45,9 +45,23 @@ namespace _Project.Scripts.City.Builders.Grid
             }
         }
 
-        public bool IsPositionFree(Vector3Int position)
+        public bool IsPositionFree(Vector3Int position, int buildingIndex)
         {
-            return _cityGrid[position.x, position.z] == CellType.Empty;
+            var building = _cityConfig.Buildings[buildingIndex];
+            var baseSize = building.BaseSize;
+
+            for (var x = position.x; x < position.x + baseSize; x++)
+            {
+                for (var z = position.z; z < position.z + baseSize; z++)
+                {
+                    if (_cityGrid[x, z] != CellType.Empty)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }
