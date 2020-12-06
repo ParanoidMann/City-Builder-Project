@@ -5,9 +5,10 @@ using ModestTree;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-using _Project.Scripts.City.Builders.Grid;
+using _Project.Scripts.City.Systems;
 using _Project.Scripts.City.ConfigWrappers;
-using _Project.Scripts.City.Builders.Terrain;
+using _Project.Scripts.City.Systems.Builders.Grid;
+using _Project.Scripts.City.Systems.Builders.Terrain;
 
 namespace _Project.Scripts.City
 {
@@ -17,12 +18,12 @@ namespace _Project.Scripts.City
         private event Action<int> BuildCompletedEvent;
 
         [SerializeField]
-        private CityMaterialManager _cityMaterialManager;
-        
+        private CityMaterialChanger _cityMaterialChanger;
+
         private CityConfig _cityConfig;
         private GridBuilder _gridBuilder;
         private TerrainBuilder _terrainBuilder;
-        
+
         private int _newBuildingIndex;
 
         [Inject]
@@ -65,10 +66,10 @@ namespace _Project.Scripts.City
             BuildCompletedEvent?.Invoke(might);
             BuildStoppedEvent?.Invoke();
         }
-        
+
         public void OnBuildingStarted()
         {
-            _cityMaterialManager.MakeBuildingsTransparent();
+            _cityMaterialChanger.MakeBuildingsTransparent();
             _newBuildingIndex = GetRandomBuildingIndex();
         }
 
@@ -78,7 +79,7 @@ namespace _Project.Scripts.City
             {
                 PlaceBuilding(position, _newBuildingIndex);
 
-                _cityMaterialManager.MakeBuildingsVisible();
+                _cityMaterialChanger.MakeBuildingsVisible();
                 InvokeBuildingCompleted(_newBuildingIndex);
             }
         }

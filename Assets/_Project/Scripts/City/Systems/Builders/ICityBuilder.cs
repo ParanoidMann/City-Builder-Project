@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Project.Scripts.City.Builders
+namespace _Project.Scripts.City.Systems.Builders
 {
     public interface ICityBuilder
     {

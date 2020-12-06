@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec062f83e5d424792f6c4928989b8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cityMaterialManager:
+  _cityMaterialChanger:
     _transparentAlpha: 0.5
     _buildingsMaterials:
     - {fileID: 2100000, guid: b90e70180f4666e4d95e3e0f38caae18, type: 2}

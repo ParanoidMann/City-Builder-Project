@@ -2,7 +2,7 @@
 using UnityEngine;
 using _Project.Scripts.City.ConfigWrappers;
 
-namespace _Project.Scripts.City.Builders.Terrain
+namespace _Project.Scripts.City.Systems.Builders.Terrain
 {
     public class TerrainBuilder : ICityBuilder
     {

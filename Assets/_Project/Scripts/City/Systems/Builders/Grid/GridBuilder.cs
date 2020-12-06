@@ -2,7 +2,7 @@
 using UnityEngine;
 using _Project.Scripts.City.ConfigWrappers;
 
-namespace _Project.Scripts.City.Builders.Grid
+namespace _Project.Scripts.City.Systems.Builders.Grid
 {
     public class GridBuilder : ICityBuilder
     {

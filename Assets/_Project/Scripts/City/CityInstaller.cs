@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 using _Project.Scripts.Json;
 using _Project.Scripts.Json.Converters;
 using _Project.Scripts.PrefabDictionary;
-using _Project.Scripts.City.Builders.Grid;
 using _Project.Scripts.City.ConfigWrappers;
-using _Project.Scripts.City.Builders.Terrain;
+using _Project.Scripts.City.Systems.Builders.Grid;
+using _Project.Scripts.City.Systems.Builders.Terrain;
 
 namespace _Project.Scripts.City
 {

@@ -6,7 +6,7 @@ using _Project.Scripts.Interaction.UI;
 using _Project.Scripts.PrefabDictionary;
 using _Project.Scripts.City.ConfigWrappers;
 
-namespace _Project.Scripts.City.Builders.Terrain
+namespace _Project.Scripts.City.Systems.Builders.Terrain
 {
     public class BuildingCreator
     {
@@ -26,7 +26,7 @@ namespace _Project.Scripts.City.Builders.Terrain
         {
             var mightCanvas = MonoBehaviour.Instantiate(_mightPrefab, root);
 
-            var mightWorldCanvas = mightCanvas.GetComponent<MightWorldCanvas>();  // TODO : Remove getComponent
+            var mightWorldCanvas = mightCanvas.GetComponent<MightWorldCanvas>(); // TODO : Remove getComponent
             mightWorldCanvas.SetText(might.ToString());
 
             return mightCanvas;
