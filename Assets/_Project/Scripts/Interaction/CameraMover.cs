@@ -22,6 +22,12 @@ namespace _Project.Scripts.Interaction
         [SerializeField]
         private Vector3 _zoomAmount;
 
+        [SerializeField]
+        private int _zoomMin = 0;
+
+        [SerializeField]
+        private int _zoomMax = 250;
+
         private Vector3 _newPosition;
         private Vector3 _newZoom;
 
@@ -71,15 +77,21 @@ namespace _Project.Scripts.Interaction
         {
             _newPosition += _root.right * -_movementSpeed;
         }
-        
+
         public void OnZoomIn()
         {
-            _newZoom += _zoomAmount;
+            if (_newZoom.y > _zoomMin)
+            {
+                _newZoom += _zoomAmount;
+            }
         }
-        
+
         public void OnZoomOut()
         {
-            _newZoom -= _zoomAmount;
+            if (_newZoom.y < _zoomMax)
+            {
+                _newZoom -= _zoomAmount;
+            }
         }
     }
 }
