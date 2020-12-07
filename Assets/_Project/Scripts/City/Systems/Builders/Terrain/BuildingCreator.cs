@@ -65,7 +65,7 @@ namespace _Project.Scripts.City.Systems.Builders.Terrain
             if (_prefabDictionary.TryGetValue(buildingConfig.PrefabId, out var buildingPrefab))
             {
                 var building = InstantiateBuilding(buildingConfig, buildingPrefab);
-                building.transform.position = position;
+                building.transform.localPosition = position;
 
                 return building;
             }

@@ -7,6 +7,7 @@ using _Project.Scripts.Json.Converters;
 using _Project.Scripts.PrefabDictionary;
 using _Project.Scripts.City.ConfigWrappers;
 using _Project.Scripts.City.Systems.Builders.Grid;
+using _Project.Scripts.City.Systems.TextureChanger;
 using _Project.Scripts.City.Systems.Builders.Terrain;
 using _Project.Scripts.City.Systems.BuildingSelectors;
 
@@ -38,6 +39,29 @@ namespace _Project.Scripts.City
             Debug.Assert(_cityFacade != null, "City Facade == null", this);
         }
 
+        private void SetupSystems()
+        {
+            Container
+                .BindInterfacesAndSelfTo<CityGridBuilder>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<CityTerrainBuilder>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<BuildingCreator>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<RandomBuildingSelector>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<TerrainTextureChangerHolder>()
+                .AsSingle();
+        }
+
         private void SetupBindings()
         {
             Container
@@ -53,12 +77,13 @@ namespace _Project.Scripts.City
                 .Bind<CityConfig>()
                 .FromIFactory(x => x.To<JsonWrapperFactory<CityConfig>>().AsSingle())
                 .AsSingle();
-            
+
             Container
                 .Bind<GameObject>()
                 .WithId(ZenjectTags.Terrain)
-                .FromIFactory(x => x.To<CityTerrainFactory>().AsSingle());
-                
+                .FromIFactory(x => x.To<CityTerrainFactory>().AsSingle())
+                .AsCached();
+
             Container
                 .Bind<CityGrid>()
                 .FromIFactory(x => x.To<CityGridFactory>().AsSingle())
@@ -78,24 +103,10 @@ namespace _Project.Scripts.City
                 .WithId(ZenjectTags.Might);
 
             Container
-                .BindInterfacesAndSelfTo<CityGridBuilder>()
-                .AsSingle();
-
-            Container
-                .BindInterfacesAndSelfTo<CityTerrainBuilder>()
-                .AsSingle();
-
-            Container
-                .BindInterfacesAndSelfTo<BuildingCreator>()
-                .AsSingle();
-            
-            Container
-                .BindInterfacesAndSelfTo<RandomBuildingSelector>()
-                .AsSingle();
-
-            Container
                 .BindInterfacesAndSelfTo<CityFacade>()
                 .FromInstance(_cityFacade);
+
+            SetupSystems();
         }
 
         public override void InstallBindings()

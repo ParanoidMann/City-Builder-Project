@@ -4,7 +4,7 @@ using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Systems.Builders.Grid
 {
-    public class CityGridBuilder : ICityBuilder
+    public class CityGridBuilder : IBuildingPlacer
     {
         private const int EmptyCellsOffset = 1;
 
@@ -18,10 +18,6 @@ namespace _Project.Scripts.City.Systems.Builders.Grid
         {
             _cityGrid = cityGrid;
             _cityConfig = cityConfig;
-        }
-
-        public void InitCityBuilder()
-        {
         }
 
         public void PlaceBuilding(Vector3Int position, int buildingIndex)

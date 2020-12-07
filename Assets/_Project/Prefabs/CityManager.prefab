@@ -88,3 +88,5 @@ MonoBehaviour:
     _buildingsMaterials:
     - {fileID: 2100000, guid: b90e70180f4666e4d95e3e0f38caae18, type: 2}
     - {fileID: 2100000, guid: 39b5905324909ae41a80bf5661aa91c3, type: 2}
+  _positionConverter:
+    _positionOffset: {x: 0, y: 0, z: 1}

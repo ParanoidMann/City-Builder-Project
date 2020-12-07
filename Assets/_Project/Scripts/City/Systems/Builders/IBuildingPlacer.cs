@@ -2,9 +2,8 @@
 
 namespace _Project.Scripts.City.Systems.Builders
 {
-    public interface ICityBuilder
+    public interface IBuildingPlacer
     {
-        void InitCityBuilder();
         void PlaceBuilding(Vector3Int position, int buildingIndex);
     }
 }

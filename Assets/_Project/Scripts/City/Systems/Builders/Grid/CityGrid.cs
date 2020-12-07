@@ -7,6 +7,9 @@
 
         private CellType[,] _grid;
 
+        public int Width => _width;
+        public int Height => _height;
+
         public CityGrid(int width, int height)
         {
             _width = width;

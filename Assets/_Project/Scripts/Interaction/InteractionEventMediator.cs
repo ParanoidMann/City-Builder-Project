@@ -25,7 +25,7 @@ namespace _Project.Scripts.Interaction
         private void OnEnable()
         {
             _uiController.SubscribeBuildCalling(OnBuildingStarted);
-            _uiController.SubscribeBuildCalling(_cityFacade.OnBuildingStarted);
+            _uiController.SubscribeBuildCalling(_cityFacade.OnBuildStarted);
 
             _inputController.SubscribeMoveUp(_cameraMover.OnMoveUp);
             _inputController.SubscribeMoveDown(_cameraMover.OnMoveDown);
@@ -39,7 +39,7 @@ namespace _Project.Scripts.Interaction
         private void OnDisable()
         {
             _uiController.UnsubscribeBuildCalling(OnBuildingStarted);
-            _uiController.UnsubscribeBuildCalling(_cityFacade.OnBuildingStarted);
+            _uiController.UnsubscribeBuildCalling(_cityFacade.OnBuildStarted);
 
             _inputController.UnsubscribeMoveUp(_cameraMover.OnMoveUp);
             _inputController.UnsubscribeMoveDown(_cameraMover.OnMoveDown);
@@ -53,19 +53,19 @@ namespace _Project.Scripts.Interaction
         private void OnBuildingStarted()
         {
             _inputController.SubscribeClickDown(_cityFacade.OnPlaceBuilding);
-            _inputController.SubscribeCancelClick(OnBuildingStopped);
+            _inputController.SubscribeCancelClick(OnBuildStopped);
 
-            _cityFacade.SubscribeBuildingCompleted(_uiController.OnIncreaseMight);
-            _cityFacade.SubscribeBuildingStopped(OnBuildingStopped);
+            _cityFacade.SubscribeBuildCompleted(_uiController.OnIncreaseMight);
+            _cityFacade.SubscribeBuildStopped(OnBuildStopped);
         }
 
-        private void OnBuildingStopped()
+        private void OnBuildStopped()
         {
             _inputController.UnsubscribeClickDown(_cityFacade.OnPlaceBuilding);
-            _inputController.UnsubscribeCancelClick(OnBuildingStopped);
+            _inputController.UnsubscribeCancelClick(OnBuildStopped);
 
-            _cityFacade.UnsubscribeBuildingCompleted(_uiController.OnIncreaseMight);
-            _cityFacade.UnsubscribeBuildingStopped(OnBuildingStopped);
+            _cityFacade.UnsubscribeBuildCompleted(_uiController.OnIncreaseMight);
+            _cityFacade.UnsubscribeBuildStopped(OnBuildStopped);
         }
     }
 }

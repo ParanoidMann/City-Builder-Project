@@ -4,7 +4,7 @@ using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Systems.Builders.Terrain
 {
-    public class CityTerrainBuilder : ICityBuilder
+    public class CityTerrainBuilder : IBuildingPlacer
     {
         private const float DefaultTerrainHeight = 1.0f;
 

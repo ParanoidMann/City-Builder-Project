@@ -1,7 +1,7 @@
 ﻿{
   "city": {
-    "width": 100,
-    "length": 150,
+    "width": 10,
+    "length": 15,
     "buildings": [
       {
         "prefabId": 0,
