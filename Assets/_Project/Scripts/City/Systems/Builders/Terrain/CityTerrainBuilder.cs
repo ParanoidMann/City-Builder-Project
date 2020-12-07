@@ -4,31 +4,27 @@ using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Systems.Builders.Terrain
 {
-    public class TerrainBuilder : ICityBuilder
+    public class CityTerrainBuilder : ICityBuilder
     {
         private const float DefaultTerrainHeight = 1.0f;
 
+        private GameObject _terrain;
         private CityConfig _cityConfig;
-        private GameObject _terrainPrefab;
         private BuildingCreator _buildingCreator;
 
-        private GameObject _terrain;
-
         [Inject]
-        private TerrainBuilder(
+        private CityTerrainBuilder(
             CityConfig cityConfig,
-            [Inject(Id = ZenjectTags.Terrain)] GameObject terrainPrefab,
+            [Inject(Id = ZenjectTags.Terrain)] GameObject terrain,
             BuildingCreator buildingCreator)
         {
             _cityConfig = cityConfig;
-            _terrainPrefab = terrainPrefab;
+            _terrain = terrain;
             _buildingCreator = buildingCreator;
         }
 
-        public void BuildCity()
+        public void InitCityBuilder()
         {
-            _terrain = MonoBehaviour.Instantiate(_terrainPrefab);
-
             _terrain.transform.localScale = new Vector3(
                 _cityConfig.Width, DefaultTerrainHeight, _cityConfig.Length);
         }

@@ -4,23 +4,24 @@ using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Systems.Builders.Grid
 {
-    public class GridBuilder : ICityBuilder
+    public class CityGridBuilder : ICityBuilder
     {
         private const int EmptyCellsOffset = 1;
 
+        private CityGrid _cityGrid;
         private CityConfig _cityConfig;
 
-        private CityGrid _cityGrid;
-
         [Inject]
-        private GridBuilder(CityConfig cityConfig)
+        private CityGridBuilder(
+            CityGrid cityGrid,
+            CityConfig cityConfig)
         {
+            _cityGrid = cityGrid;
             _cityConfig = cityConfig;
         }
 
-        public void BuildCity()
+        public void InitCityBuilder()
         {
-            _cityGrid = new CityGrid(_cityConfig.Width, _cityConfig.Length);
         }
 
         public void PlaceBuilding(Vector3Int position, int buildingIndex)

@@ -1,14 +1,13 @@
 ﻿using System;
 using Zenject;
 using ModestTree;
-
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 using _Project.Scripts.City.Systems;
 using _Project.Scripts.City.ConfigWrappers;
 using _Project.Scripts.City.Systems.Builders.Grid;
 using _Project.Scripts.City.Systems.Builders.Terrain;
+using _Project.Scripts.City.Systems.BuildingSelectors;
 
 namespace _Project.Scripts.City
 {
@@ -21,36 +20,34 @@ namespace _Project.Scripts.City
         private CityMaterialChanger _cityMaterialChanger;
 
         private CityConfig _cityConfig;
-        private GridBuilder _gridBuilder;
-        private TerrainBuilder _terrainBuilder;
+        private CityGridBuilder _gridBuilder;
+        private CityTerrainBuilder _terrainBuilder;
+        private IBuildingSelector _buildingSelector;
 
         private int _newBuildingIndex;
 
         [Inject]
         private void Construct(
             CityConfig cityConfig,
-            GridBuilder gridBuilder,
-            TerrainBuilder terrainBuilder)
+            CityGridBuilder gridBuilder,
+            CityTerrainBuilder cityTerrainBuilder,
+            IBuildingSelector buildingSelector)
         {
             _cityConfig = cityConfig;
             _gridBuilder = gridBuilder;
-            _terrainBuilder = terrainBuilder;
+            _terrainBuilder = cityTerrainBuilder;
+            _buildingSelector = buildingSelector;
         }
 
         private void Awake()
         {
-            BuildCity();
+            InitBuilders();
         }
 
-        private int GetRandomBuildingIndex()
+        private void InitBuilders()
         {
-            return Random.Range(0, _cityConfig.Buildings.Length);
-        }
-
-        private void BuildCity()
-        {
-            _gridBuilder.BuildCity();
-            _terrainBuilder.BuildCity();
+            _gridBuilder.InitCityBuilder();
+            _terrainBuilder.InitCityBuilder();
         }
 
         private void PlaceBuilding(Vector3Int position, int buildingIndex)
@@ -70,7 +67,7 @@ namespace _Project.Scripts.City
         public void OnBuildingStarted()
         {
             _cityMaterialChanger.MakeBuildingsTransparent();
-            _newBuildingIndex = GetRandomBuildingIndex();
+            _newBuildingIndex = _buildingSelector.GetBuildingIndex();
         }
 
         public void OnPlaceBuilding(Vector3Int position)

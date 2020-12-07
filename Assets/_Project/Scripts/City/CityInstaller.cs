@@ -8,6 +8,7 @@ using _Project.Scripts.PrefabDictionary;
 using _Project.Scripts.City.ConfigWrappers;
 using _Project.Scripts.City.Systems.Builders.Grid;
 using _Project.Scripts.City.Systems.Builders.Terrain;
+using _Project.Scripts.City.Systems.BuildingSelectors;
 
 namespace _Project.Scripts.City
 {
@@ -52,6 +53,16 @@ namespace _Project.Scripts.City
                 .Bind<CityConfig>()
                 .FromIFactory(x => x.To<JsonWrapperFactory<CityConfig>>().AsSingle())
                 .AsSingle();
+            
+            Container
+                .Bind<GameObject>()
+                .WithId(ZenjectTags.Terrain)
+                .FromIFactory(x => x.To<CityTerrainFactory>().AsSingle());
+                
+            Container
+                .Bind<CityGrid>()
+                .FromIFactory(x => x.To<CityGridFactory>().AsSingle())
+                .AsSingle();
 
             Container
                 .BindInterfacesAndSelfTo<PrefabSerializableDictionary>()
@@ -60,22 +71,26 @@ namespace _Project.Scripts.City
 
             Container
                 .BindInstance(_terrainPrefab)
-                .WithId(ZenjectTags.Terrain);
+                .WithId(ZenjectTags.TerrainPrefab);
 
             Container
                 .BindInstance(_mightCanvasPrefab)
                 .WithId(ZenjectTags.Might);
 
             Container
-                .BindInterfacesAndSelfTo<GridBuilder>()
+                .BindInterfacesAndSelfTo<CityGridBuilder>()
                 .AsSingle();
 
             Container
-                .BindInterfacesAndSelfTo<TerrainBuilder>()
+                .BindInterfacesAndSelfTo<CityTerrainBuilder>()
                 .AsSingle();
 
             Container
                 .BindInterfacesAndSelfTo<BuildingCreator>()
+                .AsSingle();
+            
+            Container
+                .BindInterfacesAndSelfTo<RandomBuildingSelector>()
                 .AsSingle();
 
             Container

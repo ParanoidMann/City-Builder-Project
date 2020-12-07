@@ -2,7 +2,8 @@
 {
     public enum ZenjectTags
     {
+        Might,
         Terrain,
-        Might
+        TerrainPrefab
     }
 }
