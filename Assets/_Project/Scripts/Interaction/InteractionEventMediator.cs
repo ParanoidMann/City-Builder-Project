@@ -52,8 +52,9 @@ namespace _Project.Scripts.Interaction
 
         private void OnBuildingStarted()
         {
-            _inputController.SubscribeClickDown(_cityFacade.OnPlaceBuilding);
             _inputController.SubscribeCancelClick(OnBuildStopped);
+            _inputController.SubscribeCancelClick(_cityFacade.OnBuildStopped);
+            _inputController.SubscribeClickDown(_cityFacade.OnPlaceBuilding);
 
             _cityFacade.SubscribeBuildCompleted(_uiController.OnIncreaseMight);
             _cityFacade.SubscribeBuildStopped(OnBuildStopped);
@@ -61,8 +62,9 @@ namespace _Project.Scripts.Interaction
 
         private void OnBuildStopped()
         {
-            _inputController.UnsubscribeClickDown(_cityFacade.OnPlaceBuilding);
             _inputController.UnsubscribeCancelClick(OnBuildStopped);
+            _inputController.UnsubscribeCancelClick(_cityFacade.OnBuildStopped);
+            _inputController.UnsubscribeClickDown(_cityFacade.OnPlaceBuilding);
 
             _cityFacade.UnsubscribeBuildCompleted(_uiController.OnIncreaseMight);
             _cityFacade.UnsubscribeBuildStopped(OnBuildStopped);

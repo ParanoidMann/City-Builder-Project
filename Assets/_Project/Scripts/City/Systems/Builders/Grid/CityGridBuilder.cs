@@ -24,13 +24,13 @@ namespace _Project.Scripts.City.Systems.Builders.Grid
         {
             var building = _cityConfig.Buildings[buildingIndex];
             var baseSize = building.BaseSize;
-
+            
             for (var x = position.x - EmptyCellsOffset; x < position.x + baseSize + EmptyCellsOffset; x++)
             {
-                for (var z = position.z - EmptyCellsOffset; z < position.z + baseSize + EmptyCellsOffset; z++)
+                for (var z = position.z + EmptyCellsOffset; z > position.z - baseSize - EmptyCellsOffset; z--)
                 {
                     if (x < position.x || x >= position.x + baseSize ||
-                        z < position.z || z >= position.z + baseSize)
+                        z > position.z || z <= position.z - baseSize)
                     {
                         _cityGrid[x, z] = CellType.Closed;
                     }
@@ -49,7 +49,7 @@ namespace _Project.Scripts.City.Systems.Builders.Grid
 
             for (var x = position.x; x < position.x + baseSize; x++)
             {
-                for (var z = position.z; z < position.z + baseSize; z++)
+                for (var z = position.z; z > position.z - baseSize; z--)
                 {
                     if (_cityGrid[x, z] != CellType.Empty)
                     {

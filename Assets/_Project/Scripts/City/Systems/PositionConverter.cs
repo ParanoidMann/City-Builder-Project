@@ -9,7 +9,7 @@ namespace _Project.Scripts.City.Systems
         [SerializeField]
         private Vector3Int _positionOffset;
 
-        private Vector3Int DowngradeToZeroMinimum(Vector3Int position)
+        public Vector3Int DowngradeToZeroMinimum(Vector3Int position)
         {
             position.x--;
             position.z--;
@@ -17,12 +17,10 @@ namespace _Project.Scripts.City.Systems
             return position;
         }
 
-        public Vector3Int NormalizePosition(Vector3Int position)
+        public Vector3Int AddPositionOffset(Vector3Int position)
         {
-            var downgradedPosition = DowngradeToZeroMinimum(position);
-            downgradedPosition += _positionOffset;
-
-            return downgradedPosition;
+            position += _positionOffset;
+            return position;
         }
     }
 }

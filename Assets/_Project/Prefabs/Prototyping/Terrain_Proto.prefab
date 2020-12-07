@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderer: {fileID: 7278638095081309050}
-  _freeSpaceColor: {r: 0.120666504, g: 1, b: 0, a: 0}
-  _occupiedSpaceColor: {r: 1, g: 0, b: 0.09661579, a: 0}
+  _terrainGrid: {fileID: 1444719605008004988}
+  _freeSpaceColor: {r: 0.50691825, g: 1, b: 0.43867922, a: 0}
+  _occupiedSpaceColor: {r: 1, g: 0.2971698, b: 0.366075, a: 0}
 --- !u!1001 &5495297992879054100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158,7 +159,7 @@ PrefabInstance:
     - target: {fileID: 7632309511241014379, guid: 851c44f3174961c45895a7d55af55388,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7632309511241014379, guid: 851c44f3174961c45895a7d55af55388,
         type: 3}
@@ -168,7 +169,7 @@ PrefabInstance:
     - target: {fileID: 7632309511241014379, guid: 851c44f3174961c45895a7d55af55388,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7632309511241014379, guid: 851c44f3174961c45895a7d55af55388,
         type: 3}
@@ -183,7 +184,7 @@ PrefabInstance:
     - target: {fileID: 7632309511241014379, guid: 851c44f3174961c45895a7d55af55388,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7632309511241014379, guid: 851c44f3174961c45895a7d55af55388,
         type: 3}

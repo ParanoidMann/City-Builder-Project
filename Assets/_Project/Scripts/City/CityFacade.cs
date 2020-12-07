@@ -27,7 +27,7 @@ namespace _Project.Scripts.City
         private CityGridBuilder _gridBuilder;
         private CityTerrainBuilder _terrainBuilder;
         private IBuildingSelector _buildingSelector;
-        private TerrainTextureChangerHolder _terrainTextureChanger;
+        private TerrainGridHolder _terrainGridHolder;
 
         private int _newBuildingIndex;
 
@@ -37,13 +37,13 @@ namespace _Project.Scripts.City
             CityGridBuilder gridBuilder,
             CityTerrainBuilder cityTerrainBuilder,
             IBuildingSelector buildingSelector,
-            TerrainTextureChangerHolder terrainTextureChanger)
+            TerrainGridHolder terrainGridHolder)
         {
             _cityConfig = cityConfig;
             _gridBuilder = gridBuilder;
             _terrainBuilder = cityTerrainBuilder;
             _buildingSelector = buildingSelector;
-            _terrainTextureChanger = terrainTextureChanger;
+            _terrainGridHolder = terrainGridHolder;
         }
 
         private void Awake()
@@ -54,20 +54,22 @@ namespace _Project.Scripts.City
         private void InitSystems()
         {
             _terrainBuilder.InitCityBuilder();
-            _terrainTextureChanger.InitHolder();
+            
+            _terrainGridHolder.InitHolder();
+            _terrainGridHolder.HideTerrainGrid();
         }
 
         private void PlaceBuilding(Vector3Int position, int buildingIndex)
         {
-            var normalizedPosition = _positionConverter.NormalizePosition(position);
+            _gridBuilder.PlaceBuilding(position, buildingIndex);
 
-            _gridBuilder.PlaceBuilding(normalizedPosition, buildingIndex);
-            _terrainBuilder.PlaceBuilding(normalizedPosition, buildingIndex);
+            var fixedPosition = _positionConverter.AddPositionOffset(position);
+            _terrainBuilder.PlaceBuilding(fixedPosition, buildingIndex);
         }
 
         private void InvokeBuildingCompleted(int buildingIndex)
         {
-            OnBuildCompleted();
+            OnBuildStopped();
 
             var might = _cityConfig.Buildings[buildingIndex].Might;
 
@@ -77,23 +79,28 @@ namespace _Project.Scripts.City
 
         public void OnBuildStarted()
         {
-            _terrainTextureChanger.UpdateTexture();
+            _terrainGridHolder.UpdateTexture();
+            _terrainGridHolder.ShowTerrainGrid();
+            
             _cityMaterialChanger.MakeBuildingsTransparent();
-
+            
             _newBuildingIndex = _buildingSelector.GetBuildingIndex();
         }
 
         public void OnPlaceBuilding(Vector3Int position)
         {
-            if (_gridBuilder.IsPositionFree(position, _newBuildingIndex))
+            var downgradedPosition = _positionConverter.DowngradeToZeroMinimum(position);
+            
+            if (_gridBuilder.IsPositionFree(downgradedPosition, _newBuildingIndex))
             {
-                PlaceBuilding(position, _newBuildingIndex);
+                PlaceBuilding(downgradedPosition, _newBuildingIndex);
                 InvokeBuildingCompleted(_newBuildingIndex);
             }
         }
 
-        public void OnBuildCompleted()
+        public void OnBuildStopped()
         {
+            _terrainGridHolder.HideTerrainGrid();
             _cityMaterialChanger.MakeBuildingsVisible();
         }
 

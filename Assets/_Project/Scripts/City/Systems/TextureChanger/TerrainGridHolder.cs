@@ -6,7 +6,7 @@ using _Project.Scripts.City.Systems.Builders.Grid;
 
 namespace _Project.Scripts.City.Systems.TextureChanger
 {
-    public class TerrainTextureChangerHolder
+    public class TerrainGridHolder
     {
         private CityGrid _cityGrid;
         private GameObject _terrain;
@@ -15,7 +15,7 @@ namespace _Project.Scripts.City.Systems.TextureChanger
         private TerrainTextureChanger _textureChanger;
 
         [Inject]
-        private TerrainTextureChangerHolder(
+        private TerrainGridHolder(
             CityGrid cityGrid,
             [Inject(Id = ZenjectTags.Terrain)] GameObject terrain,
             CityConfig cityConfig)
@@ -35,6 +35,16 @@ namespace _Project.Scripts.City.Systems.TextureChanger
         public void UpdateTexture()
         {
             _textureChanger.UpdatePixels(_cityGrid);
+        }
+
+        public void HideTerrainGrid()
+        {
+            _textureChanger.HideTerrainGrid();
+        }
+
+        public void ShowTerrainGrid()
+        {
+            _textureChanger.ShowTerrainGrid();
         }
     }
 }

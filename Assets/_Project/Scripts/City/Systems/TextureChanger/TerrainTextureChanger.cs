@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
+
+using _Project.Scripts.Helpers;
 using _Project.Scripts.City.Systems.Builders.Grid;
 
 namespace _Project.Scripts.City.Systems.TextureChanger
 {
     public class TerrainTextureChanger : ATextureChanger
     {
+        [SerializeField]
+        private Transform _terrainGrid;
+
         [SerializeField]
         private Color _freeSpaceColor;
 
@@ -37,6 +42,16 @@ namespace _Project.Scripts.City.Systems.TextureChanger
 
             SetPixels();
             UpdatePixels();
+        }
+
+        public void HideTerrainGrid()
+        {
+            _terrainGrid.gameObject.HideChildren();
+        }
+
+        public void ShowTerrainGrid()
+        {
+            _terrainGrid.gameObject.ShowChildren();
         }
     }
 }

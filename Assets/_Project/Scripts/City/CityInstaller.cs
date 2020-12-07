@@ -58,7 +58,7 @@ namespace _Project.Scripts.City
                 .AsSingle();
 
             Container
-                .BindInterfacesAndSelfTo<TerrainTextureChangerHolder>()
+                .BindInterfacesAndSelfTo<TerrainGridHolder>()
                 .AsSingle();
         }
 
