@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1190421921029446822}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tripple_HouseFloor_Proto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 8401336511630651552}
   - component: {fileID: 4576141288904205894}
   - component: {fileID: 8621347065373410718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Window (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 3838075516462021507}
   - component: {fileID: 5066316541759280873}
   - component: {fileID: 8538790824340248556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Window (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 6825377374897615328}
   - component: {fileID: 2219366012010406045}
   - component: {fileID: 1058937969304074239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 4173566217371395298}
   - component: {fileID: 8819360793561030134}
   - component: {fileID: 5538809549647854013}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 1559441636134723571}
   - component: {fileID: 830699642901075030}
   - component: {fileID: 4523542516712596959}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Window (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 993787278509698727}
   - component: {fileID: 1968972557951794077}
   - component: {fileID: 6414585215911577749}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Window (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

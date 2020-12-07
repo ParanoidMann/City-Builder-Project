@@ -4,7 +4,7 @@ using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Systems.Builders.Grid
 {
-    public class CityGridBuilder : IBuildingPlacer
+    public class CityGridBuilder
     {
         private const int EmptyCellsOffset = 1;
 

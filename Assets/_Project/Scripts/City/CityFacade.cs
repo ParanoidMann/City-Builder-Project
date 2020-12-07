@@ -1,9 +1,6 @@
 ﻿using System;
-
 using Zenject;
-
 using ModestTree;
-
 using UnityEngine;
 
 using _Project.Scripts.City.Systems;
@@ -26,6 +23,10 @@ namespace _Project.Scripts.City
 
         [SerializeField]
         private int _maxGridSize = 1000;
+
+        [Header("Preview Offset")]
+        [SerializeField]
+        private Vector3 _previewOffset;
 
         [Header("Systems")]
         [SerializeField]
@@ -63,6 +64,15 @@ namespace _Project.Scripts.City
             InitSystems();
         }
 
+        private void Update()
+        {
+            if (_terrainBuilder.BuildingPreview != null)
+            {
+                var mousePosition = Input.mousePosition + _previewOffset;
+                _terrainBuilder.BuildingPreview.position = Camera.main.ScreenToWorldPoint(mousePosition);
+            }
+        }
+
         private void CheckCityConfig()
         {
             if (_cityConfig.Width < _minGridSize ||
@@ -87,7 +97,7 @@ namespace _Project.Scripts.City
             _gridBuilder.PlaceBuilding(position, buildingIndex);
 
             var fixedPosition = _positionConverter.AddPositionOffset(position);
-            _terrainBuilder.PlaceBuilding(fixedPosition, buildingIndex);
+            _terrainBuilder.PlaceBuilding(fixedPosition);
         }
 
         private void InvokeBuildingCompleted(int buildingIndex)
@@ -108,6 +118,7 @@ namespace _Project.Scripts.City
             _cityMaterialChanger.MakeBuildingsTransparent();
 
             _newBuildingIndex = _buildingSelector.GetBuildingIndex();
+            _terrainBuilder.CreateBuilding(_newBuildingIndex);
         }
 
         public void OnPlaceBuilding(Vector3Int position)
@@ -124,6 +135,7 @@ namespace _Project.Scripts.City
         public void OnBuildStopped()
         {
             _terrainGridHolder.HideTerrainGrid();
+            _terrainBuilder.RemovePreviewBuilding();
             _cityMaterialChanger.MakeBuildingsVisible();
         }
 

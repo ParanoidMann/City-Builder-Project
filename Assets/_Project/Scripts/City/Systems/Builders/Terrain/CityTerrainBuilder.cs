@@ -4,13 +4,15 @@ using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Systems.Builders.Terrain
 {
-    public class CityTerrainBuilder : IBuildingPlacer
+    public class CityTerrainBuilder
     {
         private const float DefaultTerrainHeight = 1.0f;
 
         private GameObject _terrain;
         private CityConfig _cityConfig;
         private BuildingCreator _buildingCreator;
+
+        public Transform BuildingPreview { get; private set; }
 
         [Inject]
         private CityTerrainBuilder(
@@ -29,11 +31,27 @@ namespace _Project.Scripts.City.Systems.Builders.Terrain
                 _cityConfig.Width, DefaultTerrainHeight, _cityConfig.Length);
         }
 
-        public void PlaceBuilding(Vector3Int position, int buildingIndex)
+        public void CreateBuilding(int buildingIndex)
         {
             var buildingConfig = _cityConfig.Buildings[buildingIndex];
+            var building = _buildingCreator.CreateBuilding(buildingConfig);
 
-            _buildingCreator.CreateBuilding(position, buildingConfig);
+            BuildingPreview = building.transform;
+        }
+
+        public void PlaceBuilding(Vector3Int position)
+        {
+            BuildingPreview.transform.localPosition = position;
+            BuildingPreview = null;
+        }
+
+        public void RemovePreviewBuilding()
+        {
+            if (BuildingPreview != null)
+            {
+                MonoBehaviour.Destroy(BuildingPreview.gameObject);
+                BuildingPreview = null;
+            }
         }
     }
 }

@@ -60,12 +60,11 @@ namespace _Project.Scripts.City.Systems.Builders.Terrain
             return building;
         }
 
-        public GameObject CreateBuilding(Vector3Int position, BuildingConfig buildingConfig)
+        public GameObject CreateBuilding(BuildingConfig buildingConfig)
         {
             if (_prefabDictionary.TryGetValue(buildingConfig.PrefabId, out var buildingPrefab))
             {
                 var building = InstantiateBuilding(buildingConfig, buildingPrefab);
-                building.transform.localPosition = position;
 
                 return building;
             }

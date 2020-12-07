@@ -83,6 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec062f83e5d424792f6c4928989b8db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minGridSize: 100
+  _maxGridSize: 1000
+  _previewOffset: {x: 0, y: 0, z: 350}
   _cityMaterialChanger:
     _transparentAlpha: 0.5
     _buildingsMaterials:
