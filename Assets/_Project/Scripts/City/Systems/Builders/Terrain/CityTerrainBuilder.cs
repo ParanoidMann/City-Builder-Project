@@ -1,5 +1,7 @@
 ﻿using Zenject;
 using UnityEngine;
+
+using _Project.Scripts.Helpers;
 using _Project.Scripts.City.ConfigWrappers;
 
 namespace _Project.Scripts.City.Systems.Builders.Terrain
@@ -12,7 +14,7 @@ namespace _Project.Scripts.City.Systems.Builders.Terrain
         private CityConfig _cityConfig;
         private BuildingCreator _buildingCreator;
 
-        public Transform BuildingPreview { get; private set; }
+        private Transform _buildingPreview;
 
         [Inject]
         private CityTerrainBuilder(
@@ -36,21 +38,30 @@ namespace _Project.Scripts.City.Systems.Builders.Terrain
             var buildingConfig = _cityConfig.Buildings[buildingIndex];
             var building = _buildingCreator.CreateBuilding(buildingConfig);
 
-            BuildingPreview = building.transform;
+            _buildingPreview = building.transform;
         }
 
         public void PlaceBuilding(Vector3Int position)
         {
-            BuildingPreview.transform.localPosition = position;
-            BuildingPreview = null;
+            _buildingPreview.transform.localPosition = position;
+            _buildingPreview = null;
         }
 
+        public void MovePreviewBuilding(Vector3 previewOffset)
+        {
+            if (_buildingPreview != null)
+            {
+                var mousePosition = Input.mousePosition + previewOffset;
+                _buildingPreview.position = Camera.main.ScreenToWorldPoint(mousePosition); // TODO: to input
+            }
+        }
+        
         public void RemovePreviewBuilding()
         {
-            if (BuildingPreview != null)
+            if (_buildingPreview != null)
             {
-                MonoBehaviour.Destroy(BuildingPreview.gameObject);
-                BuildingPreview = null;
+                MonoBehaviour.Destroy(_buildingPreview.gameObject);
+                _buildingPreview = null;
             }
         }
     }

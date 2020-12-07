@@ -3,11 +3,12 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 using _Project.Scripts.Json;
+using _Project.Scripts.Helpers;
+using _Project.Scripts.City.Systems;
 using _Project.Scripts.Json.Converters;
 using _Project.Scripts.PrefabDictionary;
 using _Project.Scripts.City.ConfigWrappers;
 using _Project.Scripts.City.Systems.Builders.Grid;
-using _Project.Scripts.City.Systems.TextureChanger;
 using _Project.Scripts.City.Systems.Builders.Terrain;
 using _Project.Scripts.City.Systems.BuildingSelectors;
 
@@ -39,6 +40,25 @@ namespace _Project.Scripts.City
             Debug.Assert(_cityFacade != null, "City Facade == null", this);
         }
 
+        private void SetupFactories()
+        {
+            Container
+                .Bind<CityConfig>()
+                .FromIFactory(x => x.To<JsonWrapperFactory<CityConfig>>().AsSingle())
+                .AsSingle();
+
+            Container
+                .Bind<GameObject>()
+                .WithId(ZenjectTags.Terrain)
+                .FromIFactory(x => x.To<CityTerrainFactory>().AsSingle())
+                .AsCached();
+
+            Container
+                .Bind<CityGrid>()
+                .FromIFactory(x => x.To<CityGridFactory>().AsSingle())
+                .AsSingle();
+        }
+        
         private void SetupSystems()
         {
             Container
@@ -74,22 +94,6 @@ namespace _Project.Scripts.City
                 .AsSingle();
 
             Container
-                .Bind<CityConfig>()
-                .FromIFactory(x => x.To<JsonWrapperFactory<CityConfig>>().AsSingle())
-                .AsSingle();
-
-            Container
-                .Bind<GameObject>()
-                .WithId(ZenjectTags.Terrain)
-                .FromIFactory(x => x.To<CityTerrainFactory>().AsSingle())
-                .AsCached();
-
-            Container
-                .Bind<CityGrid>()
-                .FromIFactory(x => x.To<CityGridFactory>().AsSingle())
-                .AsSingle();
-
-            Container
                 .BindInterfacesAndSelfTo<PrefabSerializableDictionary>()
                 .FromInstance(_prefabDictionarySO.PrefabSerializableDictionary)
                 .AsSingle();
@@ -106,6 +110,7 @@ namespace _Project.Scripts.City
                 .BindInterfacesAndSelfTo<CityFacade>()
                 .FromInstance(_cityFacade);
 
+            SetupFactories();
             SetupSystems();
         }
 

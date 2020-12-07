@@ -2,6 +2,7 @@
 using Zenject;
 using UnityEngine;
 
+using _Project.Scripts.Helpers;
 using _Project.Scripts.Interaction.UI;
 using _Project.Scripts.PrefabDictionary;
 using _Project.Scripts.City.ConfigWrappers;
@@ -26,7 +27,7 @@ namespace _Project.Scripts.City.Systems.Builders.Terrain
         {
             var mightCanvas = MonoBehaviour.Instantiate(_mightPrefab, root);
 
-            var mightWorldCanvas = mightCanvas.GetComponent<MightWorldCanvas>(); // TODO : Remove getComponent
+            var mightWorldCanvas = mightCanvas.GetComponent<MightWorldCanvas>();
             mightWorldCanvas.SetText(might.ToString());
 
             return mightCanvas;
@@ -64,9 +65,7 @@ namespace _Project.Scripts.City.Systems.Builders.Terrain
         {
             if (_prefabDictionary.TryGetValue(buildingConfig.PrefabId, out var buildingPrefab))
             {
-                var building = InstantiateBuilding(buildingConfig, buildingPrefab);
-
-                return building;
+                return InstantiateBuilding(buildingConfig, buildingPrefab);
             }
 
             throw new InvalidOperationException("No such element");

@@ -1,10 +1,12 @@
 ﻿using Zenject;
 using UnityEngine;
 
+using _Project.Scripts.Helpers;
 using _Project.Scripts.City.ConfigWrappers;
 using _Project.Scripts.City.Systems.Builders.Grid;
+using _Project.Scripts.City.Systems.TextureChanger;
 
-namespace _Project.Scripts.City.Systems.TextureChanger
+namespace _Project.Scripts.City.Systems
 {
     public class TerrainGridHolder
     {
@@ -28,8 +30,9 @@ namespace _Project.Scripts.City.Systems.TextureChanger
         public void InitHolder()
         {
             _textureChanger = _terrain.GetComponent<TerrainTextureChanger>();
-
             _textureChanger.InitTexture(_cityConfig.Width, _cityConfig.Length);
+            
+            HideTerrainGrid();
         }
 
         public void UpdateTexture()

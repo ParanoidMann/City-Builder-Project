@@ -6,7 +6,6 @@ using UnityEngine;
 using _Project.Scripts.City.Systems;
 using _Project.Scripts.City.ConfigWrappers;
 using _Project.Scripts.City.Systems.Builders.Grid;
-using _Project.Scripts.City.Systems.TextureChanger;
 using _Project.Scripts.City.Systems.Builders.Terrain;
 using _Project.Scripts.City.Systems.BuildingSelectors;
 
@@ -66,11 +65,7 @@ namespace _Project.Scripts.City
 
         private void Update()
         {
-            if (_terrainBuilder.BuildingPreview != null)
-            {
-                var mousePosition = Input.mousePosition + _previewOffset;
-                _terrainBuilder.BuildingPreview.position = Camera.main.ScreenToWorldPoint(mousePosition);
-            }
+            _terrainBuilder.MovePreviewBuilding(_previewOffset);
         }
 
         private void CheckCityConfig()
@@ -78,7 +73,8 @@ namespace _Project.Scripts.City
             if (_cityConfig.Width < _minGridSize ||
                 _cityConfig.Width > _maxGridSize ||
                 _cityConfig.Length < _minGridSize ||
-                _cityConfig.Length > _maxGridSize)
+                _cityConfig.Length > _maxGridSize ||
+                _cityConfig.Buildings.Length == 0)
             {
                 throw new ApplicationException("game_config.json is not valid.");
             }
@@ -87,17 +83,13 @@ namespace _Project.Scripts.City
         private void InitSystems()
         {
             _terrainBuilder.InitCityBuilder();
-
             _terrainGridHolder.InitHolder();
-            _terrainGridHolder.HideTerrainGrid();
         }
 
         private void PlaceBuilding(Vector3Int position, int buildingIndex)
         {
             _gridBuilder.PlaceBuilding(position, buildingIndex);
-
-            var fixedPosition = _positionConverter.AddPositionOffset(position);
-            _terrainBuilder.PlaceBuilding(fixedPosition);
+            _terrainBuilder.PlaceBuilding(_positionConverter.AddPositionOffset(position));
         }
 
         private void InvokeBuildingCompleted(int buildingIndex)

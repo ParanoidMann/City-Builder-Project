@@ -1,4 +1,4 @@
-﻿namespace _Project.Scripts
+﻿namespace _Project.Scripts.Helpers
 {
     public enum ZenjectTags
     {
