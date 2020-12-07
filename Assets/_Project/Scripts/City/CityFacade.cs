@@ -1,6 +1,9 @@
 ﻿using System;
+
 using Zenject;
+
 using ModestTree;
+
 using UnityEngine;
 
 using _Project.Scripts.City.Systems;
@@ -17,6 +20,14 @@ namespace _Project.Scripts.City
         private event Action BuildStoppedEvent;
         private event Action<int> BuildCompletedEvent;
 
+        [Header("Grid Size")]
+        [SerializeField]
+        private int _minGridSize = 100;
+
+        [SerializeField]
+        private int _maxGridSize = 1000;
+
+        [Header("Systems")]
         [SerializeField]
         private CityMaterialChanger _cityMaterialChanger;
 
@@ -48,13 +59,25 @@ namespace _Project.Scripts.City
 
         private void Awake()
         {
+            CheckCityConfig();
             InitSystems();
+        }
+
+        private void CheckCityConfig()
+        {
+            if (_cityConfig.Width < _minGridSize ||
+                _cityConfig.Width > _maxGridSize ||
+                _cityConfig.Length < _minGridSize ||
+                _cityConfig.Length > _maxGridSize)
+            {
+                throw new ApplicationException("game_config.json is not valid.");
+            }
         }
 
         private void InitSystems()
         {
             _terrainBuilder.InitCityBuilder();
-            
+
             _terrainGridHolder.InitHolder();
             _terrainGridHolder.HideTerrainGrid();
         }
@@ -81,16 +104,16 @@ namespace _Project.Scripts.City
         {
             _terrainGridHolder.UpdateTexture();
             _terrainGridHolder.ShowTerrainGrid();
-            
+
             _cityMaterialChanger.MakeBuildingsTransparent();
-            
+
             _newBuildingIndex = _buildingSelector.GetBuildingIndex();
         }
 
         public void OnPlaceBuilding(Vector3Int position)
         {
             var downgradedPosition = _positionConverter.DowngradeToZeroMinimum(position);
-            
+
             if (_gridBuilder.IsPositionFree(downgradedPosition, _newBuildingIndex))
             {
                 PlaceBuilding(downgradedPosition, _newBuildingIndex);
